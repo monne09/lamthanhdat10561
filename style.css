@@ -1,0 +1,57 @@
+/* =========================================================
+   RELAX TIME | COFFEE IN BOX - CUSTOM STYLESHEET
+========================================================= */
+
+:root {
+    --brand-navy: #21354D;       /* Màu chữ logo & menu chính */
+    --brand-brown: #8D6644;      /* Màu nút Đặt chỗ trước */
+    --brand-brown-dark: #735133; /* Màu hover nút chính */
+    --brand-caramel: #A67850;    /* Màu nền tiêu đề hero & bán nguyệt */
+    --brand-cream: #FAF7F2;      /* Màu nền ấm nhẹ cho các section */
+    --brand-sand: #EFE7DC;       /* Màu viền/nền phụ ấm */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--brand-navy);
+    background-color: var(--brand-cream);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+    background-color: var(--brand-caramel);
+    color: #FFFFFF;
+}
+
+/* Tùy chỉnh thanh cuộn gọn gàng trong modal */
+#modal-menu-list::-webkit-scrollbar,
+#booking-form-container::-webkit-scrollbar,
+#booking-success-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+#modal-menu-list::-webkit-scrollbar-track,
+#booking-form-container::-webkit-scrollbar-track,
+#booking-success-container::-webkit-scrollbar-track {
+    background: var(--brand-cream);
+    border-radius: 9999px;
+}
+
+#modal-menu-list::-webkit-scrollbar-thumb,
+#booking-form-container::-webkit-scrollbar-thumb,
+#booking-success-container::-webkit-scrollbar-thumb {
+    background: #D8C9B8;
+    border-radius: 9999px;
+}
+
+#modal-menu-list::-webkit-scrollbar-thumb:hover,
+#booking-form-container::-webkit-scrollbar-thumb:hover,
+#booking-success-container::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-brown);
+}

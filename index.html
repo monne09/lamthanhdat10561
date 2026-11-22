@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relax Time | Coffee in Box® - Không gian cà phê &amp; giải trí riêng tư</title>
+
+    <!-- Google Fonts: Inter (hỗ trợ đầy đủ tiếng Việt sắc nét) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- File CSS riêng -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="font-sans text-brand-navy bg-brand-cream antialiased overflow-x-hidden selection:bg-brand-caramel selection:text-white">
+
+    <!-- =========================================================
+         1. HEADER & THANH ĐIỀU HƯỚNG
+    ========================================================== -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <!-- Thanh điều hướng nền trắng -->
+        <div class="bg-white relative z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between">
+
+                <!-- Logo thương hiệu Relax Time -->
+                <a href="#hero" class="flex items-center gap-2.5 group focus:outline-none">
+                    <svg class="w-9 h-9 md:w-10 md:h-10 text-brand-navy transition-transform duration-300 group-hover:scale-105" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 21L24 8L40 21" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 18V38C12 39.1046 12.8954 40 14 40H34C35.1046 40 36 39.1046 36 38V18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M19 28H29V32C29 34.2091 27.2091 36 25 36H23C20.7909 36 19 34.2091 19 32V28Z" fill="#8D6644" fill-opacity="0.18" stroke="#8D6644" stroke-width="2"/>
+                        <path d="M29 29.5H30.5C31.6046 29.5 32.5 30.3954 32.5 31.5C32.5 32.6046 31.6046 33.5 30.5 33.5H29" stroke="#8D6644" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M22 24.5C22 23.3 23 23 23 22" stroke="#8D6644" stroke-width="1.8" stroke-linecap="round"/>
+                        <path d="M26 24.5C26 23.3 27 23 27 22" stroke="#8D6644" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                    <div class="flex flex-col leading-none">
+                        <span class="text-xl md:text-2xl font-bold tracking-tight text-brand-navy">Relax Time</span>
+                        <span class="text-[10px] md:text-[11px] font-medium text-brand-brown tracking-wide text-right mt-0.5">coffee in box</span>
+                    </div>
+                </a>
+
+                <!-- Menu chính (Desktop) -->
+                <nav class="hidden lg:flex items-center gap-10 xl:gap-12 text-[15px] font-semibold text-brand-navy">
+                    <a href="#about" data-i18n="nav_about" class="hover:text-brand-brown transition-colors py-2">Về chúng tôi</a>
+                    <a href="#branches" data-i18n="nav_branches" class="hover:text-brand-brown transition-colors py-2">Chi nhánh</a>
+                    <a href="#membership" data-i18n="nav_member" class="hover:text-brand-brown transition-colors py-2">Thành viên</a>
+                    <a href="#careers" data-i18n="nav_careers" class="hover:text-brand-brown transition-colors py-2">Làm việc tại Relax Time</a>
+                </nav>
+
+                <!-- Khu vực bên phải: Ngôn ngữ VI | EN + Nút Đặt chỗ trước -->
+                <div class="hidden md:flex items-center gap-5">
+                    <div class="flex items-center text-sm font-medium text-brand-navy select-none">
+                        <button id="lang-vi" type="button" onclick="setLanguage('vi')" class="px-1.5 py-1 font-bold text-brand-navy hover:text-brand-brown transition-colors rounded">VI</button>
+                        <span class="text-gray-300 mx-0.5">|</span>
+                        <button id="lang-en" type="button" onclick="setLanguage('en')" class="px-1.5 py-1 text-gray-400 hover:text-brand-brown transition-colors rounded">EN</button>
+                    </div>
+                    <button type="button" onclick="openBookingModal()" data-i18n="nav_book"
+                        class="bg-brand-brown hover:bg-brand-brownDark text-white text-sm font-semibold px-6 py-2.5 rounded-full shadow-sm hover:shadow-md transition-all duration-200 active:scale-95">
+                        Đặt chỗ trước
+                    </button>
+                </div>
+
+                <!-- Nút Menu Mobile -->
+                <div class="flex items-center gap-3 md:hidden">
+                    <button type="button" onclick="openBookingModal()" data-i18n="nav_book_short"
+                        class="bg-brand-brown text-white text-xs font-semibold px-4 py-2 rounded-full shadow-sm">
+                        Đặt chỗ
+                    </button>
+                    <button id="mobile-menu-btn" type="button" onclick="toggleMobileMenu()" aria-label="Mở menu"
+                        class="p-2 rounded-xl text-brand-navy hover:bg-brand-cream transition-colors">
+                        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Đường vòm trắng cong mềm đặc trưng nối giữa Header và Hero -->
+        <div id="header-curve" class="w-full overflow-hidden leading-none pointer-events-none transition-opacity duration-300 -mt-px">
+            <svg class="w-full h-7 sm:h-10 md:h-12 block" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,0 L1440,0 L1440,60 Q720,4 0,60 Z" fill="#FFFFFF"/>
+            </svg>
+        </div>
+
+        <!-- Dropdown Menu cho Mobile / Tablet -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-brand-sand shadow-xl rounded-b-3xl mx-2 mt-1 overflow-hidden">
+            <div class="px-5 py-4 flex flex-col gap-1 text-sm font-semibold text-brand-navy">
+                <a href="#about" onclick="closeMobileMenu()" data-i18n="nav_about" class="py-3 px-3 rounded-xl hover:bg-brand-cream">Về chúng tôi</a>
+                <a href="#branches" onclick="closeMobileMenu()" data-i18n="nav_branches" class="py-3 px-3 rounded-xl hover:bg-brand-cream">Chi nhánh</a>
+                <a href="#membership" onclick="closeMobileMenu()" data-i18n="nav_member" class="py-3 px-3 rounded-xl hover:bg-brand-cream">Thành viên</a>
+                <a href="#careers" onclick="closeMobileMenu()" data-i18n="nav_careers" class="py-3 px-3 rounded-xl hover:bg-brand-cream">Làm việc tại Relax Time</a>
+                <div class="flex items-center justify-between pt-3 mt-2 border-t border-brand-sand">
+                    <div class="flex items-center gap-2 text-sm">
+                        <button type="button" onclick="setLanguage('vi')" class="px-3 py-1.5 rounded-lg bg-brand-cream font-bold text-brand-navy">VI</button>
+                        <button type="button" onclick="setLanguage('en')" class="px-3 py-1.5 rounded-lg hover:bg-brand-cream text-gray-500">EN</button>
+                    </div>
+                    <button type="button" onclick="closeMobileMenu(); openBookingModal()" data-i18n="nav_book"
+                        class="bg-brand-brown text-white px-5 py-2.5 rounded-full text-sm font-semibold">
+                        Đặt chỗ trước
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- =========================================================
+         2. HERO SECTION
+    ========================================================== -->
+    <section id="hero" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Ảnh nền không gian box cà phê gỗ ấm áp -->
+        <div class="absolute inset-0 z-0">
+            <img
+                src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1920&q=85"
+                alt="Không gian cà phê ấm cúng tại Relax Time"
+                onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/5C3D28/FAF7F2?text=Relax+Time+Coffee+in+Box';"
+                class="w-full h-full object-cover object-center scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#3A2414]/50 via-[#422815]/45 to-[#2D1A0E]/65"></div>
+        </div>
+
+        <!-- Nội dung chính giữa Hero -->
+        <div class="relative z-10 max-w-3xl mx-auto px-5 text-center pb-28 sm:pb-32">
+            <div class="inline-block bg-brand-caramel/90 backdrop-blur-[2px] px-5 sm:px-7 py-2 sm:py-2.5 rounded-md shadow-lg mb-4">
+                <h1 class="text-2xl sm:text-4xl md:text-[42px] font-bold text-white tracking-tight leading-tight">
+                    Relax Time | Coffee in Box<sup class="text-base sm:text-xl font-normal ml-0.5">®</sup>
+                </h1>
+            </div>
+
+            <h2 data-i18n="hero_subtitle" class="text-xl sm:text-2xl md:text-[26px] font-bold text-white drop-shadow-sm mb-4">
+                Cà phê &amp; giải trí trong không gian của riêng bạn
+            </h2>
+
+            <p data-i18n="hero_desc" class="text-sm sm:text-base md:text-[17px] text-white/95 font-normal leading-relaxed max-w-xl mx-auto mb-8 drop-shadow-sm">
+                Tận hưởng kỳ nghỉ ngắn gần nhà từ Sleepbox riêng tư, phòng chơi PS5 cực đã đến không gian hội nhóm Luxury với chi phí chỉ bằng một ly cà phê
+            </p>
+
+            <button type="button" onclick="openBookingModal()" data-i18n="hero_cta"
+                class="bg-white hover:bg-brand-cream text-brand-brown font-semibold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-xl hover:shadow-2xl transition-all duration-200 hover:-translate-y-0.5 active:scale-95">
+                Đặt không gian cho riêng bạn
+            </button>
+        </div>
+
+        <!-- Khối bán nguyệt phía dưới cùng để cuộn xuống danh sách Box -->
+        <a href="#spaces"
+           class="group absolute bottom-0 left-1/2 -translate-x-1/2 z-20 w-56 sm:w-64 h-28 sm:h-32 bg-brand-caramel/75 hover:bg-brand-caramel/90 backdrop-blur-xs rounded-t-full flex flex-col items-center justify-end pb-4 sm:pb-5 px-4 text-white transition-all duration-300 shadow-lg">
+            <svg class="w-11 h-11 sm:w-12 sm:h-12 mb-1.5 text-white/95 transition-transform duration-300 group-hover:-translate-y-1" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M32 8L54 20V44L32 56L10 44V20L32 8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M32 8V32M32 32L54 20M32 32L10 20" stroke="currentColor" stroke-width="1.3" stroke-dasharray="2 2" opacity="0.7"/>
+                <path d="M32 32V56" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M18 35L32 43L46 35" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                <path d="M22 28L32 34L42 28" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            </svg>
+            <span data-i18n="hero_scroll" class="text-xs sm:text-[13px] font-medium tracking-wide border-b border-white/80 pb-0.5">
+                Xem các loại hình không gian
+            </span>
+        </a>
+    </section>
+
+    <!-- =========================================================
+         3. CÁC LOẠI HÌNH KHÔNG GIAN (9 MÔ HÌNH BOX & KHÔNG GIAN)
+    ========================================================== -->
+    <section id="spaces" class="py-20 md:py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-brown bg-brand-sand px-4 py-1.5 rounded-full mb-3">
+                    Relax Time Spaces
+                </span>
+                <h2 data-i18n="spaces_title" class="text-3xl sm:text-4xl font-bold text-brand-navy mb-3">
+                    Các loại hình không gian tại Relax Time
+                </h2>
+                <p data-i18n="spaces_desc" class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Dù bạn cần một góc nhỏ chợp mắt, trận game PS5 đỉnh cao hay không gian quây quần cùng hội bạn thân, chúng tôi đều có chiếc Box vừa vặn cho bạn.
+                </p>
+            </div>
+
+            <!-- Thanh lọc nhanh loại phòng -->
+            <div class="flex flex-wrap items-center justify-center gap-2.5 mb-10" id="space-filters">
+                <button type="button" onclick="filterSpaces('all')" data-filter="all"
+                    class="filter-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-brown text-white shadow-sm">
+                    Tất cả (9)
+                </button>
+                <button type="button" onclick="filterSpaces('sleepbox')" data-filter="sleepbox"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Sleepbox
+                </button>
+                <button type="button" onclick="filterSpaces('ps5')" data-filter="ps5"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Box chơi PS5
+                </button>
+                <button type="button" onclick="filterSpaces('netcouple')" data-filter="netcouple"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Net Couple Sofa
+                </button>
+                <button type="button" onclick="filterSpaces('karaoke2')" data-filter="karaoke2"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Karaoke 2 người
+                </button>
+                <button type="button" onclick="filterSpaces('karaoke46')" data-filter="karaoke46"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Karaoke 4-6 người
+                </button>
+                <button type="button" onclick="filterSpaces('group4')" data-filter="group4"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Box 4 người
+                </button>
+                <button type="button" onclick="filterSpaces('luxury')" data-filter="luxury"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Box Luxury 6+ người
+                </button>
+                <button type="button" onclick="filterSpaces('openlounge')" data-filter="openlounge"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Phòng chung Gối lười
+                </button>
+                <button type="button" onclick="filterSpaces('bida')" data-filter="bida"
+                    class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Khu vực Bida
+                </button>
+            </div>
+
+            <!-- Lưới hiển thị các loại hình Box -->
+            <div id="spaces-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"></div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         3.5. THỰC ĐƠN ĐỒ ĂN & NƯỚC UỐNG ĐẶT KÈM PHÒNG + ƯU ĐÃI
+    ========================================================== -->
+    <section id="menu" class="py-20 md:py-24 bg-white border-t border-brand-sand/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-brown bg-brand-cream border border-brand-sand px-4 py-1.5 rounded-full mb-3">
+                    Menu &amp; Combo Ưu Đãi
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-navy mb-3">
+                    Thực đơn đặt kèm phòng &amp; Ưu đãi đặt trước
+                </h2>
+                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Thưởng thức đồ ăn nóng hổi, nước pha chế chuẩn vị giao tận cửa Box và nhận ngay ưu đãi cộng dồn khi đặt phòng trước.
+                </p>
+            </div>
+
+            <!-- Bảng 4 chương trình Ưu đãi nổi bật -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                <div class="rounded-3xl bg-gradient-to-br from-brand-navy to-[#2D4866] text-white p-5 shadow-md flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block text-[11px] font-bold uppercase tracking-wider bg-amber-400 text-brand-navy px-2.5 py-1 rounded-full mb-3">
+                            Áp dụng mọi loại phòng
+                        </span>
+                        <h3 class="text-lg font-bold leading-snug mb-1.5">Đặt từ 3 tiếng giảm thêm 10%</h3>
+                        <p class="text-xs text-white/80 leading-relaxed">
+                            Đặt trước từ 3 giờ trở lên được giảm trực tiếp 10% tiền phòng, áp dụng cho tất cả các hạng Box.
+                        </p>
+                    </div>
+                    <button type="button" onclick="openBookingModal(null, null, false, 3)"
+                        class="mt-4 w-full py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-semibold transition-colors">
+                        Đặt ngay 3 giờ →
+                    </button>
+                </div>
+
+                <div class="rounded-3xl bg-brand-cream border border-brand-sand p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider bg-brand-brown/15 text-brand-brown px-2.5 py-1 rounded-full">Phòng đơn (Sleepbox)</span>
+                            <span class="text-base font-extrabold text-brand-brown">-10%</span>
+                        </div>
+                        <h3 class="text-base font-bold text-brand-navy mb-1.5">Thêm nước từ 35k giảm 10%</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            Đặt Sleepbox kèm nước uống bất kỳ từ <strong>35.000đ trở lên</strong> được giảm ngay 10%.
+                        </p>
+                    </div>
+                    <button type="button" onclick="openBookingWithMenuItem('ca-phe-sua', 'sleepbox')"
+                        class="mt-4 w-full py-2 rounded-xl border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white text-xs font-semibold transition-colors">
+                        Chọn Sleepbox + Nước 35k
+                    </button>
+                </div>
+
+                <div class="rounded-3xl bg-brand-cream border border-brand-sand p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider bg-brand-brown/15 text-brand-brown px-2.5 py-1 rounded-full">Box 4 người</span>
+                            <span class="text-base font-extrabold text-brand-brown">-10%</span>
+                        </div>
+                        <h3 class="text-base font-bold text-brand-navy mb-1.5">Kèm Combo Cơm gà 69k giảm 10%</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            Đặt phòng nhóm 4 người kèm <strong>Combo Cơm gà chua ngọt (69k)</strong> giảm ngay 10%.
+                        </p>
+                    </div>
+                    <button type="button" onclick="openBookingWithMenuItem('combo-com-ga', 'group4')"
+                        class="mt-4 w-full py-2 rounded-xl border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white text-xs font-semibold transition-colors">
+                        Chọn Box 4 + Cơm gà 69k
+                    </button>
+                </div>
+
+                <div class="rounded-3xl bg-gradient-to-br from-[#FBF4EB] to-[#F3E4D2] border border-brand-caramel/40 p-5 flex flex-col justify-between hover:shadow-md transition-shadow">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[11px] font-bold uppercase tracking-wider bg-brand-brown text-white px-2.5 py-1 rounded-full">Box Luxury 6+</span>
+                            <span class="text-base font-extrabold text-brand-brown">-20%</span>
+                        </div>
+                        <h3 class="text-base font-bold text-brand-navy mb-1.5">Kèm Combo Cá viên 129k giảm 20%</h3>
+                        <p class="text-xs text-gray-700 leading-relaxed">
+                            Đặt Box Luxury kèm <strong>Combo Cá viên chiên thập cẩm (129k)</strong> giảm cực sâu 20%.
+                        </p>
+                    </div>
+                    <button type="button" onclick="openBookingWithMenuItem('combo-ca-vien', 'luxury')"
+                        class="mt-4 w-full py-2 rounded-xl bg-brand-brown hover:bg-brand-brownDark text-white text-xs font-semibold transition-colors">
+                        Chọn Luxury + Combo 129k
+                    </button>
+                </div>
+            </div>
+
+            <!-- Thanh lọc danh mục Thực đơn -->
+            <div class="flex flex-wrap items-center justify-center gap-2.5 mb-8" id="menu-filters">
+                <button type="button" onclick="filterMenu('all')" data-menu-filter="all"
+                    class="menu-filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-brown text-white shadow-sm">
+                    Tất cả thực đơn
+                </button>
+                <button type="button" onclick="filterMenu('food')" data-menu-filter="food"
+                    class="menu-filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-cream text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Đồ ăn &amp; Combo
+                </button>
+                <button type="button" onclick="filterMenu('drink-crafted')" data-menu-filter="drink-crafted"
+                    class="menu-filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-cream text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Nước pha chế cơ bản
+                </button>
+                <button type="button" onclick="filterMenu('drink-soda')" data-menu-filter="drink-soda"
+                    class="menu-filter-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-cream text-brand-navy border border-brand-sand hover:border-brand-brown">
+                    Nước ngọt
+                </button>
+            </div>
+
+            <!-- Lưới hiển thị món ăn & thức uống -->
+            <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         4. VỀ CHÚNG TÔI
+    ========================================================== -->
+    <section id="about" class="py-20 bg-brand-cream border-t border-brand-sand/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden shadow-xl border border-brand-sand">
+                        <img
+                            src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1000&q=85"
+                            alt="Không gian thư giãn riêng tư tại Relax Time"
+                            onerror="this.onerror=null; this.src='https://placehold.co/900x650/8D6644/FAF7F2?text=Relax+Time+Experience';"
+                            class="w-full h-80 sm:h-96 object-cover"
+                        />
+                    </div>
+                    <div class="absolute -bottom-5 right-5 sm:right-8 bg-white rounded-2xl shadow-lg border border-brand-sand px-5 py-3.5">
+                        <p class="text-xs text-gray-500 font-medium">Đánh giá từ khách hàng</p>
+                        <p class="text-lg font-extrabold text-brand-navy">4.9/5.0 <span class="text-amber-500">★★★★★</span></p>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-brown bg-brand-sand px-4 py-1.5 rounded-full mb-3">
+                        Về chúng tôi
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-brand-navy leading-tight mb-4">
+                        Chốn nghỉ chân &amp; tụ họp lý tưởng ngay giữa lòng thành phố
+                    </h2>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
+                        <strong>Relax Time</strong> ra đời với mong muốn mang đến một không gian cà phê thế hệ mới: vừa đủ yên tĩnh để bạn ngả lưng nghỉ trưa hay tập trung chạy deadline trong <strong>Sleepbox</strong>, lại vừa đủ sôi động để cùng hội bạn chiến game <strong>PS5</strong> hay tiệc nhẹ tại <strong>Box Luxury</strong>.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-2xl p-4 border border-brand-sand">
+                            <h3 class="font-bold text-brand-navy text-sm mb-1">Riêng tư &amp; Ấm cúng</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">Thiết kế gỗ tông ấm, có rèm/cửa cách âm riêng tư cho từng chiếc Box.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-brand-sand">
+                            <h3 class="font-bold text-brand-navy text-sm mb-1">Giải trí đa dạng</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">Máy PS5 cấu hình mạnh, Smart TV 4K, Netflix và bộ Boardgame miễn phí.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-brand-sand">
+                            <h3 class="font-bold text-brand-navy text-sm mb-1">Ẩm thực tận phòng</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">Thực đơn cơm gà, cá viên chiên, nước pha chế nóng hổi phục vụ ngay tại cửa Box.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-brand-sand">
+                            <h3 class="font-bold text-brand-navy text-sm mb-1">Chi phí hợp lý</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">Tính giá linh hoạt theo giờ kèm nhiều gói ưu đãi tiết kiệm khi đặt trước.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         5. HỆ THỐNG CHI NHÁNH
+    ========================================================== -->
+    <section id="branches" class="py-20 bg-white border-t border-brand-sand/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="inline-block text-xs font-bold uppercase tracking-widest text-brand-brown bg-brand-cream border border-brand-sand px-4 py-1.5 rounded-full mb-3">
+                    Chi nhánh
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brand-navy mb-3">
+                    Hệ thống chi nhánh Relax Time
+                </h2>
+                <p class="text-gray-600 text-sm sm:text-base">
+                    Các chi nhánh đều tọa lạc tại vị trí trung tâm, có bãi giữ xe rộng rãi và đầy đủ các hạng phòng Box.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Chi nhánh 1 -->
+                <div class="bg-brand-cream/60 rounded-3xl p-6 border border-brand-sand shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700">Đang mở cửa</span>
+                            <span class="text-xs text-gray-400 font-medium">08:00 - 23:00</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-2">Relax Time - Quận 1</h3>
+                        <p class="text-sm text-gray-600 mb-4">134 Pasteur, Phường Bến Nghé, Quận 1, TP.HCM</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Sleepbox</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">PS5 Box</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Box 4 người</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Luxury 6+</span>
+                        </div>
+                    </div>
+                    <button type="button" onclick="openBookingModal(null, 'Relax Time - Quận 1')"
+                        class="w-full py-2.5 rounded-xl border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white text-sm font-semibold transition-colors">
+                        Đặt phòng chi nhánh này
+                    </button>
+                </div>
+
+                <!-- Chi nhánh 2 -->
+                <div class="bg-brand-cream/60 rounded-3xl p-6 border border-brand-sand shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700">Đang mở cửa</span>
+                            <span class="text-xs text-gray-400 font-medium">08:00 - 23:00</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-2">Relax Time - Quận 10</h3>
+                        <p class="text-sm text-gray-600 mb-4">268 Sư Vạn Hạnh, Phường 12, Quận 10, TP.HCM</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Sleepbox</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">PS5 Box</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Box 4 người</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Luxury 6+</span>
+                        </div>
+                    </div>
+                    <button type="button" onclick="openBookingModal(null, 'Relax Time - Quận 10')"
+                        class="w-full py-2.5 rounded-xl border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white text-sm font-semibold transition-colors">
+                        Đặt phòng chi nhánh này
+                    </button>
+                </div>
+
+                <!-- Chi nhánh 3 -->
+                <div class="bg-brand-cream/60 rounded-3xl p-6 border border-brand-sand shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700">Đang mở cửa</span>
+                            <span class="text-xs text-gray-400 font-medium">08:00 - 23:00</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-navy mb-2">Relax Time - Phú Nhuận</h3>
+                        <p class="text-sm text-gray-600 mb-4">82 Phan Xích Long, Phường 2, Q. Phú Nhuận, TP.HCM</p>
+                        <div class="flex flex-wrap gap-1.5 mb-5">
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Sleepbox</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">PS5 Box</span>
+                            <span class="text-xs bg-white text-brand-brown px-2.5 py-1 rounded-lg font-medium border border-brand-sand/70">Luxury 6+</span>
+                        </div>
+                    </div>
+                    <button type="button" onclick="openBookingModal(null, 'Relax Time - Phú Nhuận')"
+                        class="w-full py-2.5 rounded-xl border border-brand-brown text-brand-brown hover:bg-brand-brown hover:text-white text-sm font-semibold transition-colors">
+                        Đặt phòng chi nhánh này
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         6. THÀNH VIÊN & TUYỂN DỤNG
+    ========================================================== -->
+    <section id="membership" class="py-16 bg-brand-cream border-t border-brand-sand/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="rounded-3xl bg-gradient-to-br from-brand-navy to-[#2F4A6A] text-white p-8 sm:p-10 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider bg-white/15 px-3 py-1 rounded-full mb-4">Relax Member</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-3">Đặc quyền Thành viên Relax Time</h3>
+                        <p class="text-white/80 text-sm sm:text-base leading-relaxed mb-6">
+                            Tích điểm sau mỗi giờ đặt box, nhận ngay ưu đãi giảm 15% cho Box Luxury dịp sinh nhật và miễn phí nâng cấp giờ chơi PS5.
+                        </p>
+                    </div>
+                    <div>
+                        <button type="button" onclick="showToast('Tính năng đăng ký thành viên đang được hoàn thiện, bạn có thể đặt phòng ngay nhé!')"
+                            class="bg-white text-brand-navy hover:bg-brand-cream font-semibold text-sm px-6 py-3 rounded-full transition-colors">
+                            Đăng ký thành viên miễn phí
+                        </button>
+                    </div>
+                </div>
+
+                <div id="careers" class="rounded-3xl bg-white border border-brand-sand p-8 sm:p-10 flex flex-col justify-between shadow-sm">
+                    <div>
+                        <span class="inline-block text-xs font-bold uppercase tracking-wider bg-brand-brown/15 text-brand-brown px-3 py-1 rounded-full mb-4">Tuyển dụng</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-brand-navy mb-3">Làm việc tại Relax Time</h3>
+                        <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
+                            Gia nhập đội ngũ trẻ trung, năng động tại các vị trí Barista, Nhân viên hỗ trợ Box &amp; Quản lý ca với môi trường thân thiện và thời gian linh hoạt.
+                        </p>
+                    </div>
+                    <div>
+                        <button type="button" onclick="showToast('Gửi CV ứng tuyển về email: hr@relaxtime.vn hoặc liên hệ Hotline 1900 6868.')"
+                            class="bg-brand-brown hover:bg-brand-brownDark text-white font-semibold text-sm px-6 py-3 rounded-full transition-colors">
+                            Xem vị trí đang tuyển
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         7. FOOTER
+    ========================================================== -->
+    <footer class="bg-brand-navy text-white/80 pt-14 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-2.5 mb-3">
+                        <span class="text-2xl font-bold text-white">Relax Time</span>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-brand-caramel text-white font-medium">Coffee in Box®</span>
+                    </div>
+                    <p class="text-sm text-white/70 max-w-md leading-relaxed">
+                        Hệ thống không gian cà phê kết hợp Sleepbox, phòng chơi PS5, Box nhóm 4 người và Box Luxury 6+ người hàng đầu dành cho giới trẻ.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Danh mục</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#about" class="hover:text-white transition-colors">Về chúng tôi</a></li>
+                        <li><a href="#spaces" class="hover:text-white transition-colors">Các loại hình Box</a></li>
+                        <li><a href="#menu" class="hover:text-white transition-colors">Thực đơn &amp; Ưu đãi</a></li>
+                        <li><a href="#branches" class="hover:text-white transition-colors">Chi nhánh</a></li>
+                        <li><a href="#membership" class="hover:text-white transition-colors">Thành viên</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Liên hệ</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>Hotline: <span class="text-white font-medium">1900 6868</span></li>
+                        <li>Email: <span class="text-white font-medium">hello@relaxtime.vn</span></li>
+                        <li>Giờ mở cửa: 08:00 - 23:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+                <p>&copy; 2026 Relax Time | Coffee in Box. All rights reserved.</p>
+                <p>Thiết kế giao diện bản khởi tạo sẵn sàng mở rộng.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =========================================================
+         8. MODAL XEM CHI TIẾT PHÒNG BOX
+    ========================================================== -->
+    <div id="detail-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl transform transition-all max-h-[90vh] flex flex-col">
+            <div class="relative h-56 sm:h-64 shrink-0 bg-brand-sand">
+                <img id="detail-img" src="" alt="" referrerpolicy="no-referrer" class="w-full h-full object-cover" />
+                <button type="button" onclick="closeDetailModal()" aria-label="Đóng"
+                    class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-brand-navy flex items-center justify-center shadow-md">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+                <span id="detail-badge" class="absolute bottom-4 left-4 bg-brand-navy/85 text-white text-xs font-semibold px-3.5 py-1.5 rounded-full backdrop-blur-xs"></span>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div class="flex items-start justify-between gap-4 mb-3">
+                    <h3 id="detail-title" class="text-2xl font-bold text-brand-navy"></h3>
+                    <div class="text-right shrink-0">
+                        <span id="detail-price" class="text-lg font-extrabold text-brand-brown block"></span>
+                        <span id="detail-price-unit" class="text-xs text-gray-500">/ giờ</span>
+                    </div>
+                </div>
+                <p id="detail-desc" class="text-sm text-gray-600 leading-relaxed mb-5"></p>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2.5">Tiện ích đi kèm</h4>
+                <ul id="detail-amenities" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-brand-navy mb-6"></ul>
+                <button id="detail-book-btn" type="button"
+                    class="w-full bg-brand-brown hover:bg-brand-brownDark text-white font-semibold py-3.5 rounded-2xl shadow-md transition-colors">
+                    Đặt không gian này ngay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         9. MODAL ĐẶT PHÒNG TRỰC TUYẾN
+    ========================================================== -->
+    <div id="booking-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-3 sm:p-5 bg-black/60 backdrop-blur-xs">
+        <div class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+            <div class="px-6 py-4 bg-brand-cream border-b border-brand-sand flex items-center justify-between shrink-0">
+                <div>
+                    <h3 class="text-lg sm:text-xl font-bold text-brand-navy">Đặt chỗ trước tại Relax Time</h3>
+                    <p class="text-xs text-gray-500">Giữ phòng nhanh chóng, không cần thanh toán trước</p>
+                </div>
+                <button type="button" onclick="closeBookingModal()" aria-label="Đóng modal đặt phòng"
+                    class="w-9 h-9 rounded-full hover:bg-brand-sand/70 text-brand-navy flex items-center justify-center transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <!-- Form đặt phòng -->
+            <div id="booking-form-container" class="p-6 overflow-y-auto space-y-5">
+                <form id="booking-form" onsubmit="handleBookingSubmit(event)" class="space-y-5">
+
+                    <!-- Bước 1: Chọn loại hình Box -->
+                    <div>
+                        <label class="block text-sm font-bold text-brand-navy mb-2">1. Chọn loại hình Box</label>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5" id="modal-box-selector"></div>
+                    </div>
+
+                    <!-- Chi nhánh & Số lượng khách -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="book-branch" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Chi nhánh</label>
+                            <select id="book-branch" required
+                                class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown">
+                                <option value="Relax Time - Quận 1">Relax Time - Quận 1</option>
+                                <option value="Relax Time - Quận 10">Relax Time - Quận 10</option>
+                                <option value="Relax Time - Phú Nhuận">Relax Time - Phú Nhuận</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="book-guests" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Số người</label>
+                            <input id="book-guests" type="number" min="1" max="12" value="1" required onchange="updateBookingSummary()"
+                                class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown" />
+                        </div>
+                    </div>
+
+                    <!-- Ngày, Giờ bắt đầu, Thời lượng -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label for="book-date" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Ngày đến</label>
+                            <input id="book-date" type="date" required
+                                class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown" />
+                        </div>
+                        <div>
+                            <label for="book-time" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Giờ nhận phòng</label>
+                            <select id="book-time" required
+                                class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown">
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00" selected>14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="18:00">18:00</option>
+                                <option value="19:00">19:00</option>
+                                <option value="20:00">20:00</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="book-duration" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Thời lượng</label>
+                            <select id="book-duration" required onchange="updateBookingSummary()"
+                                class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown">
+                                <option value="1">1 giờ</option>
+                                <option value="2" selected>2 giờ</option>
+                                <option value="3">3 giờ (Giảm thêm 10%)</option>
+                                <option value="4">4 giờ (Giảm thêm 10%)</option>
+                                <option value="5">5 giờ (Giảm thêm 10%)</option>
+                                <option value="6">6 giờ (Giảm thêm 10%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Mẹo tiết kiệm 3 giờ -->
+                    <div id="duration-promo-hint" class="rounded-xl bg-amber-50 border border-amber-200 px-3.5 py-2.5 text-xs text-amber-900 flex items-center justify-between gap-2">
+                        <span><strong>Ưu đãi đặt trước:</strong> Đặt từ <strong>3 giờ trở lên</strong> sẽ được <strong>giảm thêm 10%</strong> tiền phòng (áp dụng mọi loại phòng).</span>
+                        <button type="button" onclick="setBookingDuration(3)" class="shrink-0 bg-amber-500 hover:bg-amber-600 text-white font-bold px-2.5 py-1 rounded-lg transition-colors">
+                            Chọn 3h
+                        </button>
+                    </div>
+
+                    <!-- Bước 2: Chọn đồ ăn & nước uống đặt kèm phòng -->
+                    <div class="rounded-2xl border border-brand-sand bg-brand-cream/40 p-4 space-y-3">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <label class="block text-sm font-bold text-brand-navy">2. Đồ ăn &amp; Nước uống đặt kèm</label>
+                                <p class="text-[11px] text-gray-500">Chọn món để nhận ưu đãi giảm giá trực tiếp theo hạng phòng</p>
+                            </div>
+                            <span id="modal-cart-badge" class="hidden self-start sm:self-center text-xs font-bold bg-brand-brown text-white px-2.5 py-1 rounded-full">
+                                0 món đã chọn
+                            </span>
+                        </div>
+
+                        <div id="room-combo-banner" class="rounded-xl bg-white border border-brand-caramel/40 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5"></div>
+
+                        <div class="flex flex-wrap gap-1.5" id="modal-menu-tabs">
+                            <button type="button" onclick="switchModalMenuTab('food')" data-modal-tab="food"
+                                class="modal-menu-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-brown text-white transition-colors">
+                                Đồ ăn &amp; Combo
+                            </button>
+                            <button type="button" onclick="switchModalMenuTab('drink-crafted')" data-modal-tab="drink-crafted"
+                                class="modal-menu-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-brand-navy border border-brand-sand hover:border-brand-brown transition-colors">
+                                Nước pha chế (35k+)
+                            </button>
+                            <button type="button" onclick="switchModalMenuTab('drink-soda')" data-modal-tab="drink-soda"
+                                class="modal-menu-tab px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-brand-navy border border-brand-sand hover:border-brand-brown transition-colors">
+                                Nước ngọt
+                            </button>
+                        </div>
+
+                        <div id="modal-menu-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1"></div>
+                    </div>
+
+                    <!-- Bước 3: Thông tin liên hệ -->
+                    <div class="space-y-3">
+                        <label class="block text-sm font-bold text-brand-navy">3. Thông tin khách đặt phòng</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="book-name" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Họ và tên</label>
+                                <input id="book-name" type="text" required placeholder="Nguyễn Văn A"
+                                    class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown" />
+                            </div>
+                            <div>
+                                <label for="book-phone" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Số điện thoại</label>
+                                <input id="book-phone" type="tel" required placeholder="0901 234 567"
+                                    class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown" />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="book-note" class="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-1.5">Ghi chú thêm (không bắt buộc)</label>
+                            <input id="book-note" type="text" placeholder="VD: Cần thêm 2 tay cầm PS5, trang trí sinh nhật nhỏ, ít đá..."
+                                class="w-full rounded-xl border border-brand-sand bg-brand-cream/50 px-3.5 py-2.5 text-sm font-medium text-brand-navy focus:outline-none focus:ring-2 focus:ring-brand-brown" />
+                        </div>
+                    </div>
+
+                    <!-- Tóm tắt tạm tính -->
+                    <div class="rounded-2xl bg-brand-cream border border-brand-sand p-4 space-y-2.5">
+                        <div class="space-y-1.5 text-xs sm:text-sm">
+                            <div class="flex items-center justify-between text-brand-navy">
+                                <span id="booking-summary-label" class="font-medium">Sleepbox • 2 giờ</span>
+                                <span id="booking-room-subtotal" class="font-semibold">118.000đ</span>
+                            </div>
+                            <div id="summary-food-row" class="hidden flex items-center justify-between text-brand-navy">
+                                <span id="summary-food-label" class="font-medium">Đồ ăn &amp; nước kèm</span>
+                                <span id="booking-food-subtotal" class="font-semibold">0đ</span>
+                            </div>
+                            <div id="summary-time-discount-row" class="hidden flex items-center justify-between text-emerald-700 font-medium">
+                                <span>Ưu đãi đặt trước từ 3 giờ (-10% tiền phòng)</span>
+                                <span id="booking-time-discount">-0đ</span>
+                            </div>
+                            <div id="summary-combo-discount-row" class="hidden flex items-center justify-between text-emerald-700 font-medium">
+                                <span id="summary-combo-discount-label">Ưu đãi đặt kèm phòng</span>
+                                <span id="booking-combo-discount">-0đ</span>
+                            </div>
+                        </div>
+                        <div class="pt-2.5 border-t border-brand-sand flex items-center justify-between gap-3">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wide text-gray-500">Tổng tạm tính</p>
+                                <span id="booking-savings-badge" class="hidden inline-block mt-0.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md"></span>
+                            </div>
+                            <div class="text-right">
+                                <span id="booking-total-price" class="text-xl font-extrabold text-brand-brown">118.000đ</span>
+                                <span class="block text-[11px] text-gray-500">Đã bao gồm trà đá &amp; Wi-Fi</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="booking-submit-btn" type="submit"
+                        class="w-full bg-brand-brown hover:bg-brand-brownDark disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-2xl shadow-md hover:shadow-lg transition-all active:scale-[0.99]">
+                        Xác nhận giữ chỗ
+                    </button>
+                </form>
+            </div>
+
+            <!-- Trạng thái đặt phòng thành công -->
+            <div id="booking-success-container" class="hidden p-8 text-center space-y-4 overflow-y-auto">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h4 class="text-2xl font-bold text-brand-navy">Đặt phòng thành công!</h4>
+                <p class="text-sm text-gray-600 max-w-md mx-auto">
+                    Cảm ơn bạn đã chọn <strong>Relax Time</strong>. Nhân viên chi nhánh sẽ liên hệ xác nhận trong ít phút.
+                </p>
+
+                <div class="bg-brand-cream border border-brand-sand rounded-2xl p-5 max-w-md mx-auto text-left space-y-2 text-sm">
+                    <div class="flex items-center justify-between pb-2 border-b border-brand-sand">
+                        <span class="text-gray-500">Mã đặt chỗ:</span>
+                        <div class="flex items-center gap-2">
+                            <span id="success-code" class="font-extrabold text-brand-brown tracking-wider">RT-2026-0001</span>
+                            <button type="button" onclick="copyBookingCode()" class="text-xs bg-white border border-brand-sand px-2.5 py-1 rounded-lg hover:bg-brand-sand/50 font-medium text-brand-navy">
+                                Sao chép
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between"><span class="text-gray-500">Loại phòng:</span><span id="success-box" class="font-semibold text-brand-navy"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Chi nhánh:</span><span id="success-branch" class="font-semibold text-brand-navy"></span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Thời gian:</span><span id="success-time" class="font-semibold text-brand-navy"></span></div>
+                    <div id="success-food-row" class="hidden flex justify-between gap-3"><span class="text-gray-500 shrink-0">Món đặt kèm:</span><span id="success-food" class="font-semibold text-brand-navy text-right"></span></div>
+                    <div id="success-promo-row" class="hidden flex justify-between gap-3"><span class="text-gray-500 shrink-0">Ưu đãi áp dụng:</span><span id="success-promo" class="font-semibold text-emerald-700 text-right"></span></div>
+                    <div class="flex justify-between pt-1.5 border-t border-brand-sand"><span class="text-gray-500">Tổng tạm tính:</span><span id="success-total" class="font-bold text-brand-brown"></span></div>
+                </div>
+
+                <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+                    <button type="button" onclick="resetBookingModal()" class="px-6 py-2.5 rounded-full border border-brand-sand text-sm font-semibold text-brand-navy hover:bg-brand-cream">
+                        Đặt thêm phòng khác
+                    </button>
+                    <button type="button" onclick="closeBookingModal()" class="px-8 py-2.5 rounded-full bg-brand-brown text-white text-sm font-semibold hover:bg-brand-brownDark">
+                        Quay lại trang chủ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         10. THÔNG BÁO TOAST
+    ========================================================== -->
+    <div id="toast-box" class="fixed bottom-5 right-5 z-[80] hidden max-w-sm bg-brand-navy text-white text-sm font-medium px-5 py-3.5 rounded-2xl shadow-xl border border-white/10">
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- File JavaScript riêng -->
+    <script src="./script.js"></script>
+</body>
+</html>
