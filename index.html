@@ -26,12 +26,81 @@
         <div class="bg-white relative z-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between">
 
-                <!-- Logo thương hiệu Relax Time -->
-                <!-- Logo thương hiệu Relax Time -->
+            
 <!-- Logo thương hiệu Relax Time -->
 <a href="#hero" class="flex items-center gap-2.5 group focus:outline-none">
-    <img src="./logo.png" alt="Relax Time Logo"
-         class="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-300 group-hover:scale-105" />
+    <!-- Biểu tượng chữ R kết hợp đồng hồ & hạt cà phê vẽ bằng SVG -->
+    <svg class="w-10 h-10 md:w-12 md:h-12 shrink-0 transition-transform duration-300 group-hover:scale-105"
+         viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+            <!-- Chuyển sắc nâu cà phê cho thân chữ R -->
+            <linearGradient id="rt-r-main" x1="16" y1="12" x2="86" y2="62" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#8C5934"/>
+                <stop offset="55%" stop-color="#6A3D20"/>
+                <stop offset="100%" stop-color="#432310"/>
+            </linearGradient>
+            <!-- Mảng nâu sáng uốn cong dưới bụng chữ R -->
+            <linearGradient id="rt-r-fold" x1="50" y1="72" x2="85" y2="38" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#A66E41"/>
+                <stop offset="100%" stop-color="#C28856"/>
+            </linearGradient>
+            <!-- Chuyển sắc chân phải chữ R -->
+            <linearGradient id="rt-r-leg" x1="46" y1="72" x2="88" y2="93" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#4A2714"/>
+                <stop offset="65%" stop-color="#6F4123"/>
+                <stop offset="100%" stop-color="#8B5832"/>
+            </linearGradient>
+            <!-- Nửa trên hạt cà phê (nâu sáng) -->
+            <linearGradient id="rt-bean-top" x1="14" y1="88" x2="36" y2="70" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#9A643A"/>
+                <stop offset="100%" stop-color="#764725"/>
+            </linearGradient>
+            <!-- Nửa dưới hạt cà phê (nâu đậm) -->
+            <linearGradient id="rt-bean-bottom" x1="16" y1="93" x2="40" y2="73" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#472512"/>
+                <stop offset="100%" stop-color="#61361B"/>
+            </linearGradient>
+        </defs>
+
+        <!-- 1. Chân phải chữ R -->
+        <path d="M46 73.5 C48.5 70.5 52.5 69 57.5 69 L82.5 89 C85.5 91.3 88.2 92.6 91 93.2 L67.5 93.2 C62.5 93.2 59.2 91.4 56 88.2 L45.5 77.2 C44.4 76 44.6 74.7 46 73.5 Z"
+              fill="url(#rt-r-leg)"/>
+
+        <!-- 2. Thân chính và vòng cung trên chữ R -->
+        <path d="M16 8 L51.5 8 C73.5 8 85 21 85 40 C85 59 71 72 49 72 L38 72 L38 66 C26.5 65 20 66.5 16 71.5 Z"
+              fill="url(#rt-r-main)"/>
+
+        <!-- 3. Dải nâu sáng uốn cong tạo khối 3D dưới bụng chữ R -->
+        <path d="M84.8 36.5 C85.7 57.5 71.5 72 49 72 L45.5 72 C62.5 66 75.5 54.5 84.8 36.5 Z"
+              fill="url(#rt-r-fold)"/>
+
+        <!-- 4. Mặt đồng hồ màu trắng bên trong chữ R -->
+        <circle cx="47" cy="43" r="24.5" fill="#FFFFFF"/>
+
+        <!-- 5. Các vạch giờ trên mặt đồng hồ -->
+        <g stroke="#7A4C2B" stroke-width="2.3" stroke-linecap="round">
+            <line x1="47" y1="22.2" x2="47" y2="25.8"/>       <!-- 12h -->
+            <line x1="57.4" y1="25" x2="55.6" y2="28.1"/>     <!-- 1h -->
+            <line x1="65" y1="32.6" x2="61.9" y2="34.4"/>     <!-- 2h -->
+            <line x1="67.8" y1="43" x2="64.2" y2="43"/>       <!-- 3h -->
+            <line x1="29" y1="53.4" x2="32.1" y2="51.6"/>     <!-- 8h -->
+            <line x1="26.2" y1="43" x2="29.8" y2="43"/>       <!-- 9h -->
+            <line x1="29" y1="32.6" x2="32.1" y2="34.4"/>     <!-- 10h -->
+            <line x1="36.6" y1="25" x2="38.4" y2="28.1"/>     <!-- 11h -->
+        </g>
+
+        <!-- 6. Kim giờ, kim phút và tâm đồng hồ -->
+        <line x1="47" y1="43" x2="41.8" y2="29.8" stroke="#4D2915" stroke-width="3.6" stroke-linecap="round"/>
+        <line x1="47" y1="43" x2="47" y2="64.5" stroke="#4D2915" stroke-width="2.7" stroke-linecap="round"/>
+        <circle cx="47" cy="43" r="3.4" fill="#4D2915"/>
+
+        <!-- 7. Hạt cà phê ở góc dưới bên trái -->
+        <path d="M14 88.2 C12.6 76.2 21.5 68.5 36.8 70.6 C29.5 73 24.8 78.2 20.8 83.8 C18.8 86.5 16.5 87.8 14 88.2 Z"
+              fill="url(#rt-bean-top)"/>
+        <path d="M38.8 72.4 C42.2 84.2 33 93.4 14.5 93.2 L14.5 90.8 C18.2 90 21.2 88 23.8 84.5 C27.8 79 32.2 74.5 38.8 72.4 Z"
+              fill="url(#rt-bean-bottom)"/>
+    </svg>
+
     <div class="flex flex-col leading-none">
         <span class="text-xl md:text-2xl font-bold tracking-tight text-brand-navy">Relax Time</span>
         <span class="text-[10px] md:text-[11px] font-medium text-brand-brown tracking-wide text-right mt-0.5">coffee in box</span>
